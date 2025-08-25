@@ -6,11 +6,18 @@ const {
   getUserById,
 } = require('../controllers/userController');
 const { protect } = require('../middleware/authMiddleware');
-const { upload } = require('../middleware/uploadMiddleware');
+const { upload, handleMulterError } = require('../middleware/uploadMiddleware');
 
-// Protected routes
+// Protected routes with proper error handling
 router.get('/me', protect, getUserProfile);
-router.put('/me', protect, upload.single('avatar'), updateUserProfile);
+
+// Update user profile with file upload support
+router.put('/me', 
+  protect, 
+  upload.single('avatar'), 
+  handleMulterError, // Handle multer errors
+  updateUserProfile
+);
 
 // Public routes
 router.get('/:id', getUserById);
