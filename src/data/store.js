@@ -1,10 +1,10 @@
 // Simple in-memory store (replace with DB later if needed)
-import { v4 as uuid } from 'uuid';
-import bcrypt from 'bcryptjs';
+const { v4: uuid } = require('uuid');
+const bcrypt = require('bcryptjs');
 
 const now = () => new Date().toISOString();
 
-export const db = {
+const db = {
   users: [],
   posts: [],
   events: [],
@@ -31,8 +31,10 @@ db.users.push({
 });
 
 // Helpers
-export function createId() {
+function createId() {
   return uuid();
 }
+
+module.exports = { db, createId };
 
 

@@ -9,6 +9,7 @@ dotenv.config();
 const authRoutes = require('./routes/authRoutes');
 const postRoutes = require('./routes/postRoutes');
 const userRoutes = require('./routes/userRoutes');
+const eventsRoutes = require('./routes/eventsRoutes');
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use('/uploads', express.static(require('path').join(process.cwd(), 'backend'
 app.use('/api/auth', authRoutes);
 app.use('/api/posts', postRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/events', eventsRoutes);
 
 // Health check route
 app.get('/health', (req, res) => {
